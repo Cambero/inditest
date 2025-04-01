@@ -6,6 +6,7 @@
 #  category      :enum             not null
 #  code          :string(10)       not null
 #  description   :text
+#  discarded_at  :datetime
 #  images        :string           default([]), is an Array
 #  location      :string
 #  name          :string           not null
@@ -23,10 +24,12 @@
 #
 #  index_products_on_code           (code) UNIQUE
 #  index_products_on_created_by_id  (created_by_id)
+#  index_products_on_discarded_at   (discarded_at)
 #  index_products_on_updated_by_id  (updated_by_id)
 #
 class Product < ApplicationRecord
   include UserTrackable
+  include Discard::Model
 
   enum :category, { clothing: "clothing", electronics: "electronics", books: "books", beauty: "beauty" }, prefix: true, validate: true
 
