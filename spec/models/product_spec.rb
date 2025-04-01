@@ -28,6 +28,12 @@
 require "rails_helper"
 
 RSpec.describe Product, type: :model do
+  describe "UserTrackable" do
+    subject { build(:product) }
+
+    it_behaves_like "UserTrackable"
+  end
+
   it { is_expected.to validate_presence_of(:name) }
 
   describe "code" do

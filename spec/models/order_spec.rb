@@ -25,6 +25,12 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
+  describe "UserTrackable" do
+    subject { build(:order) }
+
+    it_behaves_like "UserTrackable"
+  end
+
   it { is_expected.to validate_presence_of(:product) }
   it { is_expected.to validate_presence_of(:user) }
   it { is_expected.to validate_numericality_of(:units).only_integer.is_greater_than(0) }

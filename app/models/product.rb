@@ -26,6 +26,8 @@
 #  index_products_on_updated_by_id  (updated_by_id)
 #
 class Product < ApplicationRecord
+  include UserTrackable
+
   enum :category, { clothing: "clothing", electronics: "electronics", books: "books", beauty: "beauty" }, prefix: true, validate: true
 
   validates :name, presence: true

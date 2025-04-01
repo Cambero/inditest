@@ -23,6 +23,8 @@
 #  index_orders_on_user_id        (user_id)
 #
 class Order < ApplicationRecord
+  include UserTrackable
+
   enum :status, { pending: "pending", ordered: "ordered" }, prefix: true
 
   validates :product, presence: true
