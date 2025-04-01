@@ -20,7 +20,15 @@
 #  index_users_on_jti                   (jti)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class UserSerializer
-  include JSONAPI::Serializer
-  attributes :id, :email, :name, :is_admin
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password { "secret" }
+    name { Faker::Name.name }
+    is_admin { false }
+
+    trait :admin do
+      is_admin { true }
+    end
+  end
 end
