@@ -31,6 +31,10 @@ class Product < ApplicationRecord
   include UserTrackable
   include Discard::Model
 
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
+  end
+
   enum :category, { clothing: "clothing", electronics: "electronics", books: "books", beauty: "beauty" }, prefix: true, validate: true
 
   validates :name, presence: true
@@ -40,6 +44,20 @@ class Product < ApplicationRecord
   validates :users_score, numericality: { only_integer: true , in: 1..5 }
 
   has_many :orders
+
+  def soft_delete
+    discard
+
+    orders.status_pending.destroy_all
+  end
+
+  def image_url
+    Rails.application.routes.url_helpers.url_for(image) if image.attached?
+  end
+
+  def thumb_url
+    Rails.application.routes.url_helpers.url_for(image.variant(:thumb)) if image.attached?
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == :admin

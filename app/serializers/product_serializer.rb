@@ -30,7 +30,7 @@
 class ProductSerializer
   include JSONAPI::Serializer
 
-  attributes :code, :name, :category, :description, :images, :price, :units, :users_score
+  attributes :code, :name, :category, :description, :images, :price, :units, :users_score, :image_url, :thumb_url
 
   is_admin = Proc.new { |record, params| params && params[:admin] == true }
 

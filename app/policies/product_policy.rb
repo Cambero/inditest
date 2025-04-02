@@ -9,6 +9,34 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    true
+  end
+
+  def update?
+    true
+  end
+
+  def destroy?
+    true
+  end
+
+  def permitted_attributes_for_create
+    if user.is_admin?
+      %i[name category code units users_score price description image location real_price sold_units]
+    else
+      %i[name category code units users_score price description image]
+    end
+  end
+
+  def permitted_attributes_for_update
+    if user.is_admin?
+      %i[name category units users_score price description image location real_price sold_units]
+    else
+      %i[name category units users_score price description image]
+    end
+  end
+
   class Scope
     def initialize(user, scope)
       @user  = user

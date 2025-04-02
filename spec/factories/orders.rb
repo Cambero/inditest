@@ -30,9 +30,5 @@ FactoryBot.define do
 
     product
     user
-
-    trait :admin do
-      is_admin { true }
-    end
   end
 end
