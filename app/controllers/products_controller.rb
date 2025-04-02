@@ -7,6 +7,14 @@ class ProductsController < ApplicationController
     render json: ProductSerializer.new(@q.result, { params: { admin: current_user.is_admin? } })
   end
 
+  def show
+    authorize Product
+
+    @product = policy_scope(Product).find(params[:id])
+
+    render json: ProductSerializer.new(@product, { params: { admin: current_user.is_admin? } })
+  end
+
   private
 
   def set_ransack_auth_object

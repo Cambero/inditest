@@ -20,7 +20,7 @@ RSpec.describe "Products", type: :request do
       get products_path, params:
     end
 
-    it 'responds with ok status' do
+    it "responds with ok status" do
       expect(response).to have_http_status :ok
     end
 
@@ -146,6 +146,58 @@ RSpec.describe "Products", type: :request do
 
           expect(result_sort).to eq(expected_sort)
         end
+      end
+    end
+  end
+
+  describe "GET /show" do
+    before :all do
+      create(:product, :books, name: "The Godfather", price: 19.90, users_score: 5)
+      create(:product, :books, :discarded, name: "The Godfather 2", price: 21.50, users_score: 3)
+    end
+
+    before do
+      auth_headers(user)
+
+      get product_path(product_id)
+    end
+
+    let(:product_id) { Product.find_by(name: "The Godfather") }
+
+    it "responds with ok status" do
+      expect(response).to have_http_status :ok
+    end
+
+    it "result does not include private fields" do
+      expect(result["attributes"].keys.include?("location")).to be_falsey
+      expect(result["attributes"].keys.include?("real_price")).to be_falsey
+      expect(result["attributes"].keys.include?("sold_units")).to be_falsey
+      expect(result["attributes"].keys.include?("discarded_at")).to be_falsey
+    end
+
+
+    context "when user is admin" do
+      let(:user) { create(:user, :admin) }
+      let(:product_id) { Product.find_by(name: "The Godfather 2") }
+
+      it "can see deleted product" do
+        expect(result["attributes"]["name"]).to eq("The Godfather 2")
+      end
+
+      it "result include private fields" do
+        expect(result["attributes"].keys.include?("location")).to be_present
+        expect(result["attributes"].keys.include?("real_price")).to be_present
+        expect(result["attributes"].keys.include?("sold_units")).to be_present
+        expect(result["attributes"].keys.include?("discarded_at")).to be_present
+      end
+    end
+
+    context "when user is not admin" do
+      let(:user) { create(:user) }
+      let(:product_id) { Product.find_by(name: "The Godfather 2") }
+
+      it "can not see deleted product" do
+        expect(response).to have_http_status :not_found
       end
     end
   end
