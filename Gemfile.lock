@@ -88,6 +88,10 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
+    database_cleaner-active_record (2.2.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -183,6 +187,8 @@ GEM
       stringio
     puma (6.6.0)
       nio4r (~> 2.0)
+    pundit (2.5.0)
+      activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (3.1.12)
     rack-cors (2.0.2)
@@ -225,6 +231,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (4.3.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.13.1)
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -313,6 +323,7 @@ DEPENDENCIES
   annotate
   bootsnap
   brakeman
+  database_cleaner-active_record
   debug
   devise
   devise-jwt
@@ -322,8 +333,10 @@ DEPENDENCIES
   jsonapi-serializer
   pg (~> 1.1)
   puma (>= 5.0)
+  pundit (~> 2.5)
   rack-cors
   rails (~> 7.2.2, >= 7.2.2.1)
+  ransack
   rspec-rails (~> 7.0.0)
   rubocop-rails-omakase
   shoulda-matchers

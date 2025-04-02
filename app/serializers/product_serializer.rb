@@ -27,33 +27,15 @@
 #  index_products_on_discarded_at   (discarded_at)
 #  index_products_on_updated_by_id  (updated_by_id)
 #
-class Product < ApplicationRecord
-  include UserTrackable
-  include Discard::Model
+class ProductSerializer
+  include JSONAPI::Serializer
 
-  enum :category, { clothing: "clothing", electronics: "electronics", books: "books", beauty: "beauty" }, prefix: true, validate: true
+  attributes :code, :name, :category, :description, :images, :price, :units, :users_score
 
-  validates :name, presence: true
-  validates :code, presence: true, length: { is: 10 }, format: { with: /\A[a-zA-Z0-9]+\z/ }
-  validates :code, uniqueness: true, if: :code_changed?
-  validates :units, numericality: { only_integer: true , greater_than: 0 }
-  validates :users_score, numericality: { only_integer: true , in: 1..5 }
+  is_admin = Proc.new { |record, params| params && params[:admin] == true }
 
-  has_many :orders
-
-  def self.ransackable_attributes(auth_object = nil)
-    if auth_object == :admin
-      %w(name category price discarded_at)
-    else
-      %w(name category price)
-    end
-  end
-
-  def self.ransackable_associations(auth_object = nil)
-    []
-  end
-
-  def self.ransortable_attributes(auth_object = nil)
-    %w(price users_score)
-  end
+  attribute :location, if: is_admin
+  attribute :real_price, if: is_admin
+  attribute :sold_units, if: is_admin
+  attribute :discarded_at, if: is_admin
 end

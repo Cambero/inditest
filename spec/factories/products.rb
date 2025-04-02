@@ -32,7 +32,7 @@ FactoryBot.define do
     name { "product #{Faker::Lorem.word}" }
     category { %w[clothing electronics books beauty].sample }
     code { Faker::Alphanumeric.unique.alphanumeric(number: 10) }
-    units { rand(100) }
+    units { rand(100).next }
     users_score { rand(5).next }
     price { rand * 1000.0 }
     real_price { price * 0.6 }
@@ -58,6 +58,10 @@ FactoryBot.define do
     trait :beauty do
       name { Faker::Book.title }
       category { "beauty" }
+    end
+
+    trait :discarded do
+      discarded_at { Time.now }
     end
   end
 end

@@ -33,6 +33,8 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'jsonapi-serializer'
 gem 'discard', '~> 1.4'
+gem 'ransack'
+gem "pundit", "~> 2.5"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -49,6 +51,5 @@ group :development, :test do
   gem 'annotate'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'database_cleaner-active_record'
 end
-
-
