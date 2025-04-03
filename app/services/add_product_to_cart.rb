@@ -9,7 +9,7 @@ class AddProductToCart
       order.units = order.units.to_i + @units
       order.unit_price = @product.price
 
-      order.expiration_date = Time.now + 2.days
+      order.expiration_date = 2.days.after
       order.save
     end
 

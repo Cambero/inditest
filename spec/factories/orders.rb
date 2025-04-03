@@ -25,10 +25,17 @@
 FactoryBot.define do
   factory :order do
     status { "pending" }
-    unit_price { rand * 1000.0 }
+    unit_price { product.price }
     units { rand(3).next }
+    expiration_date { 2.days.after }
 
     product
     user
+
+    trait :ordered do
+      status { "ordered" }
+      expiration_date { nil }
+      order_date { Date.today - rand(100).hours }
+    end
   end
 end
