@@ -36,4 +36,17 @@ class Order < ApplicationRecord
 
   belongs_to :user
   belongs_to :product
+
+  delegate :name, to: :product
+  delegate :thumb_url, to: :product, allow_nil: true
+
+  scope :shopping_cart, -> (user) { status_pending.where(user:) }
+  scope :order_history, -> (user) { status_ordered.where(user:) }
+
+  scope :summary, -> (user) { order_history(user).select("order_date, sum(units * unit_price) as total, count(*) as products").group(:order_date) }
+  scope :detail, -> (user, order_date) { where(user:).where(order_date:) }
+
+  def order_date_str
+    order_date&.strftime("%Y%m%d%H%M%S")
+  end
 end

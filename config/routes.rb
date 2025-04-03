@@ -14,4 +14,11 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :products
+
+  get 'users/:id/orders', to: 'orders#index'
+  get 'users/:id/orders/:order_date/products', to: 'orders#show'
+  get 'users/:id/shopping_cart', to: 'orders#show', defaults: { order_date: nil }
+  post 'users/:id/shopping_cart', to: 'orders#create'
+  delete 'users/:id/shopping_cart/:product_id', to: 'orders#destroy'
+  post 'users/:id/shopping_cart/process', to: 'orders#process_cart'
 end
