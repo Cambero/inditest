@@ -30,7 +30,7 @@ class ProcessCart
       order_date = Time.now.strftime("%Y%m%d%H%M%S")
 
       ActiveRecord::Base.transaction do
-        @cart.update_all(expiration_date: nil, order_date:)
+        @cart.update_all(expiration_date: nil, order_date:, status: "ordered")
 
         @cart.each do |order|
           product = order.product

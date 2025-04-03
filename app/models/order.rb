@@ -43,7 +43,7 @@ class Order < ApplicationRecord
   scope :shopping_cart, ->(user) { status_pending.where(user:) }
   scope :order_history, ->(user) { status_ordered.where(user:) }
 
-  scope :summary, ->(user) { order_history(user).select("order_date, sum(units * unit_price) as total, count(*) as products").group(:order_date) }
+  scope :summary, ->(user) { order_history(user).select("order_date, sum(units * unit_price) as total, sum(units) as products").group(:order_date) }
   scope :detail, ->(user, order_date) { where(user:).where(order_date:) }
 
   def order_date_str
