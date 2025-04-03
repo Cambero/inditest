@@ -29,7 +29,7 @@ class User < ApplicationRecord
         :jwt_authenticatable, jwt_revocation_strategy: self
 
   validates :name, presence: true
-  validates :is_admin, inclusion: [true, false]
+  validates :is_admin, inclusion: [ true, false ]
 
   has_many :orders, dependent: :restrict_with_error
 end

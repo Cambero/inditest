@@ -33,7 +33,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by deleted product" do
-        let(:params) { {q: {discarded_at_not_null: "true"}} }
+        let(:params) { { q: { discarded_at_not_null: "true" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(1)
@@ -42,7 +42,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by name" do
-        let(:params) { {q: {name_eq: "The Godfather"}} }
+        let(:params) { { q: { name_eq: "The Godfather" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(1)
@@ -51,7 +51,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by category" do
-        let(:params) { {q: {category_eq: "books"}} }
+        let(:params) { { q: { category_eq: "books" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(4)
@@ -59,7 +59,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by price" do
-        let(:params) { {q: {price_gteq: 15.0, price_lteq: 20.0}} }
+        let(:params) { { q: { price_gteq: 15.0, price_lteq: 20.0 } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(2)
@@ -67,22 +67,22 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can sort by price" do
-        let(:params) { {q: {category_eq: "books", s: "price desc"}} }
+        let(:params) { { q: { category_eq: "books", s: "price desc" } } }
 
         it "responds with sorted products" do
-          expected_sort = ["The Godfather 2", "The Godfather", "Flow", "Alice in Wonderland"]
-          result_sort = result.map{ |product| product["attributes"]["name"] }
+          expected_sort = [ "The Godfather 2", "The Godfather", "Flow", "Alice in Wonderland" ]
+          result_sort = result.map { |product| product["attributes"]["name"] }
 
           expect(result_sort).to eq(expected_sort)
         end
       end
 
       context "can sort by users score" do
-        let(:params) { {q: {category_eq: "books", s: "users_score desc"}} }
+        let(:params) { { q: { category_eq: "books", s: "users_score desc" } } }
 
         it "responds with sorted products" do
-          expected_sort = ["The Godfather", "Alice in Wonderland", "The Godfather 2", "Flow"]
-          result_sort = result.map{ |product| product["attributes"]["name"] }
+          expected_sort = [ "The Godfather", "Alice in Wonderland", "The Godfather 2", "Flow" ]
+          result_sort = result.map { |product| product["attributes"]["name"] }
 
           expect(result_sort).to eq(expected_sort)
         end
@@ -95,7 +95,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can not filter by deleted product" do
-        let(:params) { {q: {discarded_at_not_null: "true"}} }
+        let(:params) { { q: { discarded_at_not_null: "true" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(5)
@@ -103,7 +103,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by name" do
-        let(:params) { {q: {name_eq: "The Godfather"}} }
+        let(:params) { { q: { name_eq: "The Godfather" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(1)
@@ -112,7 +112,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by category" do
-        let(:params) { {q: {category_eq: "books"}} }
+        let(:params) { { q: { category_eq: "books" } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(3)
@@ -120,7 +120,7 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can filter by price" do
-        let(:params) { {q: {price_gteq: 15.0, price_lteq: 20.0}} }
+        let(:params) { { q: { price_gteq: 15.0, price_lteq: 20.0 } } }
 
         it "responds with filtered products" do
           expect(result.length).to eq(2)
@@ -128,22 +128,22 @@ RSpec.describe "Products", type: :request do
       end
 
       context "can sort by price" do
-        let(:params) { {q: {category_eq: "books", s: "price asc"}} }
+        let(:params) { { q: { category_eq: "books", s: "price asc" } } }
 
         it "responds with sorted products" do
-          expected_sort = ["Alice in Wonderland", "Flow", "The Godfather"]
-          result_sort = result.map{ |product| product["attributes"]["name"] }
+          expected_sort = [ "Alice in Wonderland", "Flow", "The Godfather" ]
+          result_sort = result.map { |product| product["attributes"]["name"] }
 
           expect(result_sort).to eq(expected_sort)
         end
       end
 
       context "can sort by users score" do
-        let(:params) { {q: {category_eq: "books", s: "users_score asc"}} }
+        let(:params) { { q: { category_eq: "books", s: "users_score asc" } } }
 
         it "responds with sorted products" do
-          expected_sort = ["Flow", "Alice in Wonderland", "The Godfather"]
-          result_sort = result.map{ |product| product["attributes"]["name"] }
+          expected_sort = [ "Flow", "Alice in Wonderland", "The Godfather" ]
+          result_sort = result.map { |product| product["attributes"]["name"] }
 
           expect(result_sort).to eq(expected_sort)
         end

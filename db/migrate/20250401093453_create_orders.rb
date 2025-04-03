@@ -9,7 +9,7 @@ class CreateOrders < ActiveRecord::Migration[7.2]
       t.decimal :unit_price, null: false
       t.datetime :expiration_date
       t.datetime :order_date
-      t.enum :status, enum_type: "order_status" , null: false
+      t.enum :status, enum_type: "order_status", null: false
 
       t.belongs_to :created_by
       t.belongs_to :updated_by

@@ -11,4 +11,3 @@ class ApplicationController < ActionController::API
     User.current_user = current_user if current_user
   end
 end
-

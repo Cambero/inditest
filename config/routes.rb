@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq" # access it at http://localhost:3000/sidekiq
 
   devise_for :users, defaults: { format: :json },
-                     controllers: { sessions: 'users/sessions' },
-                     path: '',
-                     path_names: { sign_in: 'sign-in' }
+                     controllers: { sessions: "users/sessions" },
+                     path: "",
+                     path_names: { sign_in: "sign-in" }
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -20,10 +20,10 @@ Rails.application.routes.draw do
 
   resources :products
 
-  get 'users/:id/orders', to: 'orders#index'
-  get 'users/:id/orders/:order_date/products', to: 'orders#show'
-  get 'users/:id/shopping_cart', to: 'orders#show', defaults: { order_date: nil }
-  post 'users/:id/shopping_cart', to: 'orders#create'
-  delete 'users/:id/shopping_cart/:product_id', to: 'orders#destroy'
-  post 'users/:id/shopping_cart/process', to: 'orders#process_cart'
+  get "users/:id/orders", to: "orders#index"
+  get "users/:id/orders/:order_date/products", to: "orders#show"
+  get "users/:id/shopping_cart", to: "orders#show", defaults: { order_date: nil }
+  post "users/:id/shopping_cart", to: "orders#create"
+  delete "users/:id/shopping_cart/:product_id", to: "orders#destroy"
+  post "users/:id/shopping_cart/process", to: "orders#process_cart"
 end

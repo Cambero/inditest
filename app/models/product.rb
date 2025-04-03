@@ -32,7 +32,7 @@ class Product < ApplicationRecord
   include Discard::Model
 
   has_one_attached :image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
+    attachable.variant :thumb, resize_to_limit: [ 100, 100 ], preprocessed: true
   end
 
   enum :category, { clothing: "clothing", electronics: "electronics", books: "books", beauty: "beauty" }, prefix: true, validate: true
@@ -40,8 +40,8 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :code, presence: true, length: { is: 10 }, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :code, uniqueness: true, if: :code_changed?
-  validates :units, numericality: { only_integer: true , greater_than: 0 }
-  validates :users_score, numericality: { only_integer: true , in: 1..5 }
+  validates :units, numericality: { only_integer: true, greater_than: 0 }
+  validates :users_score, numericality: { only_integer: true, in: 1..5 }
 
   has_many :orders
 
@@ -61,9 +61,9 @@ class Product < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == :admin
-      %w(name category price discarded_at)
+      %w[name category price discarded_at]
     else
-      %w(name category price)
+      %w[name category price]
     end
   end
 
@@ -72,6 +72,6 @@ class Product < ApplicationRecord
   end
 
   def self.ransortable_attributes(auth_object = nil)
-    %w(price users_score)
+    %w[price users_score]
   end
 end

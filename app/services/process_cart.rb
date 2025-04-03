@@ -58,5 +58,4 @@ class ProcessCart
         order.name if order.units > order.product.units
       end
     end
-
 end
