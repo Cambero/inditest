@@ -1,19 +1,3 @@
-# permite procesar los productos en estado pendiente en el carrito de la compra del usuario.
-
-# Esta acción implica:
-# - Asegurarse de que se disponen de las unidades de los productos solicitadas.
-# - En caso contrarío devolver un error informando de qué productos no están disponibles.
-
-# - Actualizar el estado de los productos de pending a ordered .
-# - Actualizar el campo order_date de los productos.
-# - expiration_date = nil
-
-# - Actualizar el contador de unidades disponibles de los productos procesados.
-
-# - Enviar un correo al usuario indicando que el pedido se ha efectuado correctamente.
-
-
-# ** Transacion para actualizar Product, Order # units
 class ProcessCart
     class NotEnoughProducts < StandardError
     end

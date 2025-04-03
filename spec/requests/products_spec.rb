@@ -204,4 +204,8 @@ RSpec.describe "Products", type: :request do
       end
     end
   end
+
+  xdescribe "POST /create"
+  xdescribe "PATCH /update"
+  xdescribe "DELETE /destroy"
 end

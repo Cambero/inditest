@@ -62,4 +62,6 @@ RSpec.describe Product, type: :model do
   }
 
   it { is_expected.to have_many(:orders) }
+
+  xdescribe "soft_delete"
 end
