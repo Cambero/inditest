@@ -4,9 +4,10 @@ RSpec.describe "Products", type: :request do
   include AuthHelper
   let(:user) { create(:user) }
   let(:params) { {} }
-  let(:result) { JSON.parse(response.body)["data"] }
 
   describe "GET /index" do
+    let(:result) { JSON.parse(response.body)["data"] }
+
     before :all do
       create_list(:product, 2, :clothing)
       create(:product, :books, name: "Alice in Wonderland", price: 9.99, users_score: 4)
@@ -151,6 +152,8 @@ RSpec.describe "Products", type: :request do
   end
 
   describe "GET /show" do
+    let(:result) { JSON.parse(response.body) }
+
     before :all do
       create(:product, :books, name: "The Godfather", price: 19.90, users_score: 5)
       create(:product, :books, :discarded, name: "The Godfather 2", price: 21.50, users_score: 3)
@@ -169,10 +172,10 @@ RSpec.describe "Products", type: :request do
     end
 
     it "result does not include private fields" do
-      expect(result["attributes"].keys.include?("location")).to be_falsey
-      expect(result["attributes"].keys.include?("real_price")).to be_falsey
-      expect(result["attributes"].keys.include?("sold_units")).to be_falsey
-      expect(result["attributes"].keys.include?("discarded_at")).to be_falsey
+      expect(result.keys.include?("location")).to be_falsey
+      expect(result.keys.include?("real_price")).to be_falsey
+      expect(result.keys.include?("sold_units")).to be_falsey
+      expect(result.keys.include?("discarded_at")).to be_falsey
     end
 
 
@@ -181,14 +184,14 @@ RSpec.describe "Products", type: :request do
       let(:product_id) { Product.find_by(name: "The Godfather 2") }
 
       it "can see deleted product" do
-        expect(result["attributes"]["name"]).to eq("The Godfather 2")
+        expect(result["name"]).to eq("The Godfather 2")
       end
 
       it "result include private fields" do
-        expect(result["attributes"].keys.include?("location")).to be_present
-        expect(result["attributes"].keys.include?("real_price")).to be_present
-        expect(result["attributes"].keys.include?("sold_units")).to be_present
-        expect(result["attributes"].keys.include?("discarded_at")).to be_present
+        expect(result.keys.include?("location")).to be_present
+        expect(result.keys.include?("real_price")).to be_present
+        expect(result.keys.include?("sold_units")).to be_present
+        expect(result.keys.include?("discarded_at")).to be_present
       end
     end
 
