@@ -42,5 +42,9 @@ module Inditest
     config.api_only = true
 
     config.active_storage.variant_processor = :mini_magick
+
+    config.session_store :cookie_store, key: "_indi_app_session"
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
   end
 end

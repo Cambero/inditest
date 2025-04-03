@@ -1,8 +1,13 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq" # access it at http://localhost:3000/sidekiq
+
   devise_for :users, defaults: { format: :json },
                      controllers: { sessions: 'users/sessions' },
                      path: '',
                      path_names: { sign_in: 'sign-in' }
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

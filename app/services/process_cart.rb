@@ -41,6 +41,8 @@ class ProcessCart
           product.save!
         end
       end
+
+      ProcessedCartMailer.processed(@user.id, order_date).deliver_later
     end
 
     def cart

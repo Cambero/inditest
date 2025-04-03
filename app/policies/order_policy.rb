@@ -16,4 +16,8 @@ class OrderPolicy < ApplicationPolicy
   def destroy?
     create?
   end
+
+  def process_cart?
+    create?
+  end
 end
