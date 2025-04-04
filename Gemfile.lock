@@ -106,7 +106,7 @@ GEM
     devise-jwt (0.12.1)
       devise (~> 4.0)
       warden-jwt_auth (~> 0.10)
-    diff-lcs (1.6.0)
+    diff-lcs (1.6.1)
     discard (1.4.0)
       activerecord (>= 4.2, < 9.0)
     drb (2.2.1)
@@ -139,7 +139,7 @@ GEM
       mini_magick (>= 4.9.5, < 6)
       ruby-vips (>= 2.0.17, < 3)
     io-console (0.8.0)
-    irb (1.15.1)
+    irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
@@ -265,7 +265,7 @@ GEM
     rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (7.0.2)
+    rspec-rails (7.1.1)
       actionpack (>= 7.0)
       activesupport (>= 7.0)
       railties (>= 7.0)
@@ -364,7 +364,7 @@ DEPENDENCIES
   rails (~> 7.2.2, >= 7.2.2.1)
   ransack
   redis (>= 4.0.1)
-  rspec-rails (~> 7.0.0)
+  rspec-rails (~> 7.1.1)
   rubocop-rails-omakase
   shoulda-matchers
   sidekiq
